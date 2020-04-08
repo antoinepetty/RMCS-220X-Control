@@ -133,7 +133,8 @@ long getAttr(byte command,int numberOfBytes){
   Serial.println("Waiting to receive "+String(numberOfBytes)+" bytes...");
   while(numberOfBytes > Wire.available()){
     //Serial.println("Waiting for enough bytes");
-    if (numberOfBytes <= Wire.available()) { // if correct num of bytes received
+  }
+  if (numberOfBytes <= Wire.available()) { // if correct num of bytes received
       for(int i=0; i<numberOfBytes; i++){
         long currentByte = Wire.read();
         Serial.println("Received byte: "+String(currentByte));
@@ -141,7 +142,6 @@ long getAttr(byte command,int numberOfBytes){
         result |= currentByte;
       }
     }
-  }
   
   return result;
 }
