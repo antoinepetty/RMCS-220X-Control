@@ -133,7 +133,7 @@ long getAttr(byte command,int numberOfBytes){
   Wire.write(byte(command));          // sends command byte
   Wire.write(byte(0));          // sends dummy byte
   Wire.endTransmission();
-  
+  delay(10);
   Wire.requestFrom(ADDR, numberOfBytes);
   Serial.println("Waiting to receive "+String(numberOfBytes)+" bytes...");
   Serial.println("Currently "+String(Wire.available())+" bytes available");
