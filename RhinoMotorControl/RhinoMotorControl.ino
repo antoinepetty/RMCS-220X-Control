@@ -48,7 +48,7 @@ void setMotorSpeed(int motorSpeed){
 
 /* Get the speed of the motor (-255 to 255) */
 int getMotorSpeed(){
-  get2ByteAttr(SPEED_ATTR);
+  return get2ByteAttr(SPEED_ATTR);
 }
 
 /* Set the maximum speed of the motor (0 to 255) */
