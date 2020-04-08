@@ -18,26 +18,29 @@ void setup() {
   Serial.println("Starting i2c connection...");
   Wire.begin(); // join i2c bus
 
+  // Calibrate motor. Set current position as 0
+  setEncoderPosition(0);
+
   printDebugInfo();
 
   
   Serial.println("Setting position to 0 deg");
-  setEncoderPositionInDegrees(0);
+  goToPosition(stepsFromDegrees(0))
   delay(2000);
   Serial.println("Position is " + String(getEncoderPosition()));
 
   Serial.println("Setting position to 180 deg");
-  setEncoderPositionInDegrees(180);
+  goToPosition(stepsFromDegrees(180))
   delay(2000);
   Serial.println("Position is " + String(getEncoderPosition()));
 
   Serial.println("Setting position to 0 deg");
-  setEncoderPositionInDegrees(0);
+  goToPosition(stepsFromDegrees(0))
   delay(2000);
   Serial.println("Position is " + String(getEncoderPosition()));
 
   Serial.println("Setting position to -180 deg");
-  setEncoderPositionInDegrees(-180);
+  goToPosition(stepsFromDegrees(-180))
   delay(2000);
   Serial.println("Position is " + String(getEncoderPosition()));
   
@@ -142,13 +145,6 @@ int getGoToPosition(){
 /* Set the relative "go to" position (-2147483647 to 2147483647) */
 void goToRelativePosition(long value){
   set4ByteAttr(RELATIVE_GO_TO_ATTR, value);
-}
-
-
-
-/* Set the encoder position in degrees */
-void setEncoderPositionInDegrees(float valueInDegrees){
-  goToPosition(stepsFromDegrees(valueInDegrees));
 }
 
 long stepsFromDegrees(float angle){
