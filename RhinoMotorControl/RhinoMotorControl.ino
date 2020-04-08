@@ -142,6 +142,10 @@ long stepsFromDegrees(float angle){
   return angle/DEGREES_RESOLUTION;
 }
 
+double stepsToDegrees(long steps){
+  return steps*DEGREES_RESOLUTION;
+}
+
 /* Sets any 2 byte attribute */
 void set2ByteAttr(byte command, int value){
   Wire.beginTransmission(ADDR);
