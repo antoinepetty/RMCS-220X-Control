@@ -157,16 +157,31 @@ void set2ByteAttr(byte command, int value){
 
 /* Sets any 4 byte attribute */
 void set4ByteAttr(byte command, long value){
+  byte buf[4];
+  buf[0] = (byte) value;
+  buf[1] = (byte) (value >> 8);
+  buf[2] = (byte) (value >> 16);
+  buf[3] = (byte) (value >> 24);
+  
   Wire.beginTransmission(ADDR);
   Wire.write(byte(command));      // sends command byte
-  Wire.write((byte) value);       // sends value byte lsb
-  Serial.println("Sent byte: "+String((byte) value));
-  Wire.write((byte) value << 8);
-  Serial.println("Sent byte: "+String((byte) value << 8));
-  Wire.write((byte) value << 16);
-  Serial.println("Sent byte: "+String((byte) value << 16));
-  Wire.write((byte) value << 24); // sends value byte msb
-  Serial.println("Sent byte: "+String((byte) value << 24));
+  
+  Wire.write(buf[0]);
+  Serial.print("Sent byte: 0x");
+  Serial.println(buf[0], HEX);
+  
+  Wire.write(buf[1]);
+  Serial.print("Sent byte: 0x");
+  Serial.println(buf[1], HEX);
+  
+  Wire.write(buf[2]);
+  Serial.print("Sent byte: 0x");
+  Serial.println(buf[2], HEX);
+  
+  Wire.write(buf[3]);
+  Serial.print("Sent byte: 0x");
+  Serial.println(buf[3], HEX);
+  
   Wire.endTransmission();
 }
 
