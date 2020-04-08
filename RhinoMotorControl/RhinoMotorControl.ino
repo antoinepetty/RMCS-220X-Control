@@ -25,6 +25,9 @@ void setup() {
 }
 
 void loop() {
+  printDebugInfo();
+
+  
   Serial.println("Setting position to 0");
   setEncoderPositionInDegrees(0);
   delay(2000);
@@ -44,6 +47,17 @@ void loop() {
   setEncoderPositionInDegrees(-180);
   delay(2000);
   Serial.println("Position is " + String(getEncoderPosition()));
+}
+
+void printDebugInfo(){
+  Serial.println("Max motor speed is "+String(getMaxSpeed()));
+  Serial.println("Current motor speed is "+String(getMotorSpeed()));
+  Serial.println("Speed damping is "+String(getSpeedDamping()));
+  Serial.println("Encoder Position is "+String(getEncoderPosition()));
+  Serial.println("Go-to position is "+String(getGoToPosition()));
+  Serial.println("Speed-feedback gain term is "+String(getSpeedFeedbackGainTerm()));
+  Serial.println("P-gain term is "+String(getPGainTerm()));
+  Serial.println("I-gain term is "+String(getIGainTerm()));
 }
 
 /* Set the speed of the motor (-255 to 255) */
