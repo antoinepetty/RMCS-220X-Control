@@ -1,6 +1,6 @@
 #include <Wire.h>
 
-#define ADDR 0x08 //Default address
+#define ADDR 0x08 // Address of motor on i2c bus
 
 #define MAX_SPEED_ATTR 0
 #define SPEED_ATTR 1
@@ -11,29 +11,34 @@
 #define P_GAIN_TERM_ATTR 6
 #define I_GAIN_TERM_ATTR 7
 #define RELATIVE_GO_TO_ATTR 8
+#define DEGREES_RESOLUTION 0.2
 
 void setup() {
   Serial.begin(9600);
   Serial.println("Starting i2c connection...");
   Wire.begin(); // join i2c bus
 
-  Serial.println("Speed is " + String(getMotorSpeed()));
-  Serial.println("Setting speed to 150");
-  setMotorSpeed(150);
+  Serial.println("Setting position to 0");
+  setEncoderPositionInDegrees(0);
   delay(2000);
-  Serial.println("Speed is " + String(getMotorSpeed()));
-  Serial.println("Setting speed to 0");
-  setMotorSpeed(0);
+  Serial.println("Position is " + String(getEncoderPosition()));
+
+  Serial.println("Setting position to 180");
+  setEncoderPositionInDegrees(180);
   delay(2000);
-  Serial.println("Speed is " + String(getMotorSpeed()));
-  Serial.println("Setting speed to -150");
-  setMotorSpeed(-150);
+  Serial.println("Position is " + String(getEncoderPosition()));
+
+  Serial.println("Setting position to 0");
+  setEncoderPositionInDegrees(0);
   delay(2000);
-  Serial.println("Speed is " + String(getMotorSpeed()));
-  Serial.println("Setting speed to 0");
-  setMotorSpeed(150);
+  Serial.println("Position is " + String(getEncoderPosition()));
+
+  Serial.println("Setting position to -180");
+  setEncoderPositionInDegrees(-180);
   delay(2000);
-  Serial.println("Speed is " + String(getMotorSpeed()));
+  Serial.println("Position is " + String(getEncoderPosition()));
+  
+  
   Serial.println("End of test.");
 }
 
@@ -56,9 +61,19 @@ void setMaxSpeed(int maxSpeed){
   set2ByteAttr(MAX_SPEED_ATTR, maxSpeed);
 }
 
+/* Get the maximum speed of the motor (0 to 255) */
+int getMaxSpeed(){
+  return get2ByteAttr(MAX_SPEED_ATTR);
+}
+
 /* Set the speed damping (0 to 255) */
 void setSpeedDamping(int value){
   set2ByteAttr(SPEED_DAMP_ATTR, value);
+}
+
+/* Get the speed damping (0 to 255) */
+int getSpeedDamping(){
+  return get2ByteAttr(SPEED_DAMP_ATTR);
 }
 
 /* Set the speed feedback gain term (0 to 32767) */
@@ -66,9 +81,19 @@ void setSpeedFeedbackGainTerm(int value){
   set2ByteAttr(SPEED_FDBK_GAIN_TERM_ATTR, value);
 }
 
+/* Get the speed feedback gain term (0 to 32767) */
+int getSpeedFeedbackGainTerm(){
+  return get2ByteAttr(SPEED_FDBK_GAIN_TERM_ATTR);
+}
+
 /* Set the p-gain term (0 to 32767) */
 void setPGainTerm(int value){
   set2ByteAttr(P_GAIN_TERM_ATTR, value);
+}
+
+/* Get the p-gain term (0 to 32767) */
+int getPGainTerm(){
+  return get2ByteAttr(P_GAIN_TERM_ATTR);
 }
 
 /* Set the i-gain term (0 to 32767) */
@@ -76,9 +101,19 @@ void setIGainTerm(int value){
   set2ByteAttr(I_GAIN_TERM_ATTR, value);
 }
 
+/* Get the i-gain term (0 to 32767) */
+int getIGainTerm(){
+  return get2ByteAttr(I_GAIN_TERM_ATTR);
+}
+
 /* Set the encoder position (-2147483647 to 2147483647) */
 void setEncoderPosition(long value){
   set4ByteAttr(ENCODER_POS_ATTR, value);
+}
+
+/* Get the encoder position (-2147483647 to 2147483647) */
+int getEncoderPosition(){
+  return get4ByteAttr(ENCODER_POS_ATTR);
 }
 
 /* Set the "go to" position (-2147483647 to 2147483647) */
@@ -86,9 +121,25 @@ void goToPosition(long value){
   set4ByteAttr(GO_TO_POS_ATTR, value);
 }
 
+/* Get the "go to" position (-2147483647 to 2147483647) */
+int getGoToPosition(){
+  return get4ByteAttr(GO_TO_POS_ATTR);
+}
+
 /* Set the relative "go to" position (-2147483647 to 2147483647) */
 void goToRelativePosition(long value){
   set4ByteAttr(RELATIVE_GO_TO_ATTR, value);
+}
+
+
+
+/* Set the encoder position in degrees */
+void setEncoderPositionInDegrees(float valueInDegrees){
+  set4ByteAttr(ENCODER_POS_ATTR, stepsFromDegrees(valueInDegrees));
+}
+
+long stepsFromDegrees(float angle){
+  return angle/DEGREES_RESOLUTION;
 }
 
 /* Sets any 2 byte attribute */
@@ -128,27 +179,18 @@ long get4ByteAttr(byte command){
 /* Get the value of any attribute */
 long getAttr(byte command,int numberOfBytes){
   long result = 0;
-  //Serial.println("Sending command "+String(command));
   Wire.beginTransmission(ADDR);
   Wire.write(byte(command));          // sends command byte
   Wire.endTransmission();
-  delay(10);
+  delay(5); // Delay to allow the motor's controller to react to the previous message
   Wire.requestFrom(ADDR, numberOfBytes);
-  //Serial.println("Waiting to receive "+String(numberOfBytes)+" bytes...");
-  //Serial.println("Currently "+String(Wire.available())+" bytes available");
-  while(numberOfBytes > Wire.available()){
-    //Serial.println("Waiting for enough bytes");
-  }
+  //while(numberOfBytes > Wire.available()){  } // Wait for enough bytes
   if (numberOfBytes <= Wire.available()) { // if correct num of bytes received
-      for(int i=0; i<numberOfBytes; i++){
-        long currentByte = Wire.read();
-        currentByte = currentByte << (8*i);
-        Serial.print("-Received byte: 0x");
-        Serial.println(currentByte, HEX);
-        result |= currentByte;
-      }
+    for(int i=0; i<numberOfBytes; i++){
+      long currentByte = Wire.read();
+      currentByte = currentByte << (8*i);
+      result |= currentByte;
     }
-  Serial.print("-Value is: 0x");
-  Serial.println(result, HEX);
+  }
   return result;
 }
