@@ -13,13 +13,28 @@
 #define RELATIVE_GO_TO_ATTR 8
 
 void setup() {
+  Serial.begin(9600);
+  Serial.println("Starting i2c connection...");
   Wire.begin(); // join i2c bus
-  
-  setMotorSpeed(50);
-  delay(5000);
-  setMotorSpeed(100);
-  delay(5000);
+
+  Serial.println("Speed is " + getMotorSpeed());
+  Serial.println("Setting speed to 150");
+  setMotorSpeed(150);
+  delay(2000);
+  Serial.println("Speed is " + getMotorSpeed());
+  Serial.println("Setting speed to 0");
   setMotorSpeed(0);
+  delay(2000);
+  Serial.println("Speed is " + getMotorSpeed());
+  Serial.println("Setting speed to -150");
+  setMotorSpeed(-150);
+  delay(2000);
+  Serial.println("Speed is " + getMotorSpeed());
+  Serial.println("Setting speed to 0");
+  setMotorSpeed(150);
+  delay(2000);
+  Serial.println("Speed is " + getMotorSpeed());
+  Serial.println("End of test.");
 }
 
 void loop() {
@@ -29,6 +44,11 @@ void loop() {
 /* Set the speed of the motor (-255 to 255) */
 void setMotorSpeed(int motorSpeed){
   set2ByteAttr(SPEED_ATTR, motorSpeed);
+}
+
+/* Get the speed of the motor (-255 to 255) */
+int getMotorSpeed(){
+  get2ByteAttr(SPEED_ATTR);
 }
 
 /* Set the maximum speed of the motor (0 to 255) */
@@ -89,4 +109,33 @@ void set4ByteAttr(byte command, long value){
   Wire.write((byte) value >> 16);
   Wire.write((byte) value >> 24); // sends value byte msb
   Wire.endTransmission();
+}
+
+/* Gets any 2 byte attribute */
+void get2ByteAttr(byte command){
+  getAttr(command, 2);
+}
+
+/* Gets any 4 byte attribute */
+void get4ByteAttr(byte command){
+  getAttr(command, 4);
+}
+
+/* Get the value of any attribute */
+long getAttr(byte command,int numberOfBytes){
+  long result = 0;
+  
+  Wire.beginTransmission(ADDR);
+  Wire.write(byte(command));          // sends command byte
+  Wire.endTransmission();
+  
+  Wire.requestFrom(ADDR, numberOfBytes);
+  if (numberOfBytes <= Wire.available()) { // if correct num of bytes received
+    for(int i=0; i<numberOfBytes; i++){
+      long currentByte = Wire.read();
+      currentByte = currentByte << 8*i;
+      result |= currentByte;
+    }
+  }
+  return result;
 }
