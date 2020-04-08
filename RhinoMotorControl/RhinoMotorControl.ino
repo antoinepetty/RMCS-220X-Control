@@ -128,14 +128,14 @@ void get4ByteAttr(byte command){
 /* Get the value of any attribute */
 long getAttr(byte command,int numberOfBytes){
   long result = 0;
-  Serial.println("Sending command "+String(command));
+  //Serial.println("Sending command "+String(command));
   Wire.beginTransmission(ADDR);
   Wire.write(byte(command));          // sends command byte
   Wire.endTransmission();
   delay(10);
   Wire.requestFrom(ADDR, numberOfBytes);
-  Serial.println("Waiting to receive "+String(numberOfBytes)+" bytes...");
-  Serial.println("Currently "+String(Wire.available())+" bytes available");
+  //Serial.println("Waiting to receive "+String(numberOfBytes)+" bytes...");
+  //Serial.println("Currently "+String(Wire.available())+" bytes available");
   while(numberOfBytes > Wire.available()){
     //Serial.println("Waiting for enough bytes");
   }
@@ -143,13 +143,12 @@ long getAttr(byte command,int numberOfBytes){
       for(int i=0; i<numberOfBytes; i++){
         long currentByte = Wire.read();
         currentByte = currentByte << (8*i);
-        Serial.print("Received byte: ");
+        Serial.print("-Received byte: ");
         Serial.println(currentByte, HEX);
         result |= currentByte;
-        Serial.print("Value currently is");
-        Serial.println(result, HEX);
       }
     }
-  
+  Serial.print("-Value is: ");
+  Serial.println(result, HEX);
   return result;
 }
