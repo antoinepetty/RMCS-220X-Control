@@ -25,22 +25,22 @@ void setup() {
 
   
   Serial.println("Setting position to 0 deg");
-  goToPosition(stepsFromDegrees(0))
+  goToPosition(stepsFromDegrees(0));
   delay(5000);
   Serial.println("Position is " + String(getEncoderPosition()));
 
   Serial.println("Setting position to 180 deg");
-  goToPosition(stepsFromDegrees(180))
+  goToPosition(stepsFromDegrees(180));
   delay(5000);
   Serial.println("Position is " + String(getEncoderPosition()));
 
   Serial.println("Setting position to 0 deg");
-  goToPosition(stepsFromDegrees(0))
+  goToPosition(stepsFromDegrees(0));
   delay(5000);
   Serial.println("Position is " + String(getEncoderPosition()));
 
   Serial.println("Setting position to -180 deg");
-  goToPosition(stepsFromDegrees(-180))
+  goToPosition(stepsFromDegrees(-180));
   delay(5000);
   Serial.println("Position is " + String(getEncoderPosition()));
   
