@@ -131,7 +131,6 @@ long getAttr(byte command,int numberOfBytes){
   Serial.println("Sending command "+String(command));
   Wire.beginTransmission(ADDR);
   Wire.write(byte(command));          // sends command byte
-  Wire.write(byte(0));          // sends dummy byte
   Wire.endTransmission();
   delay(10);
   Wire.requestFrom(ADDR, numberOfBytes);
