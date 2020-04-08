@@ -136,6 +136,7 @@ long getAttr(byte command,int numberOfBytes){
     if (numberOfBytes <= Wire.available()) { // if correct num of bytes received
       for(int i=0; i<numberOfBytes; i++){
         long currentByte = Wire.read();
+        Serial.println("Received byte: "+String(currentByte));
         currentByte = currentByte << 8*i;
         result |= currentByte;
       }
