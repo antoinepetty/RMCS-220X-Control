@@ -105,9 +105,13 @@ void set4ByteAttr(byte command, long value){
   Wire.beginTransmission(ADDR);
   Wire.write(byte(command));      // sends command byte
   Wire.write((byte) value);       // sends value byte lsb
+  Serial.println("Sent byte: "+String((byte) value));
   Wire.write((byte) value >> 8);
+  Serial.println("Sent byte: "+String((byte) value >> 8);
   Wire.write((byte) value >> 16);
+  Serial.println("Sent byte: "+String((byte) value >> 16);
   Wire.write((byte) value >> 24); // sends value byte msb
+  Serial.println("Sent byte: "+String((byte) value >> 24);
   Wire.endTransmission();
 }
 
@@ -131,6 +135,7 @@ long getAttr(byte command,int numberOfBytes){
   
   Wire.requestFrom(ADDR, numberOfBytes);
   Serial.println("Waiting to receive "+String(numberOfBytes)+" bytes...");
+  Serial.println("Currently "+String(Wire.available())+" bytes available");
   while(numberOfBytes > Wire.available()){
     //Serial.println("Waiting for enough bytes");
   }
