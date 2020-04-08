@@ -18,6 +18,13 @@ void setup() {
   Serial.println("Starting i2c connection...");
   Wire.begin(); // join i2c bus
 
+  
+  
+  
+  //Serial.println("End of test.");
+}
+
+void loop() {
   Serial.println("Setting position to 0");
   setEncoderPositionInDegrees(0);
   delay(2000);
@@ -37,13 +44,6 @@ void setup() {
   setEncoderPositionInDegrees(-180);
   delay(2000);
   Serial.println("Position is " + String(getEncoderPosition()));
-  
-  
-  Serial.println("End of test.");
-}
-
-void loop() {
-  
 }
 
 /* Set the speed of the motor (-255 to 255) */
