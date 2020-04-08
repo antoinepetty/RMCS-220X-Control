@@ -147,6 +147,8 @@ long getAttr(byte command,int numberOfBytes){
         Serial.print("Received byte: ");
         Serial.println(currentByte, HEX);
         result |= currentByte;
+        Serial.print("Value currently is");
+        Serial.println(result, HEX);
       }
     }
   
