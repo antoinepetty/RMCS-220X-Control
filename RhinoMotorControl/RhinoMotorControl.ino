@@ -148,7 +148,7 @@ void goToRelativePosition(long value){
 
 /* Set the encoder position in degrees */
 void setEncoderPositionInDegrees(float valueInDegrees){
-  set4ByteAttr(ENCODER_POS_ATTR, stepsFromDegrees(valueInDegrees));
+  goToPosition(stepsFromDegrees(valueInDegrees));
 }
 
 long stepsFromDegrees(float angle){
