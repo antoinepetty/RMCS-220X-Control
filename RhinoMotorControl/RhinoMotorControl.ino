@@ -116,13 +116,13 @@ void set4ByteAttr(byte command, long value){
 }
 
 /* Gets any 2 byte attribute */
-void get2ByteAttr(byte command){
-  getAttr(command, 2);
+int get2ByteAttr(byte command){
+  return (int) getAttr(command, 2);
 }
 
 /* Gets any 4 byte attribute */
-void get4ByteAttr(byte command){
-  getAttr(command, 4);
+long get4ByteAttr(byte command){
+  return getAttr(command, 4);
 }
 
 /* Get the value of any attribute */
