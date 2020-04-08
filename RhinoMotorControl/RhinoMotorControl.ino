@@ -124,14 +124,15 @@ void get4ByteAttr(byte command){
 /* Get the value of any attribute */
 long getAttr(byte command,int numberOfBytes){
   long result = 0;
-  
+  Serial.println("Sending command "+String(command));
   Wire.beginTransmission(ADDR);
   Wire.write(byte(command));          // sends command byte
   Wire.endTransmission();
   
   Wire.requestFrom(ADDR, numberOfBytes);
+  Serial.println("Waiting to receive "+String(numberOfBytes)+" bytes...");
   while(numberOfBytes > Wire.available()){
-    Serial.println("Waiting for enough bytes");
+    //Serial.println("Waiting for enough bytes");
     if (numberOfBytes <= Wire.available()) { // if correct num of bytes received
       for(int i=0; i<numberOfBytes; i++){
         long currentByte = Wire.read();
