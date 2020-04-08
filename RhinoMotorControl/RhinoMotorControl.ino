@@ -143,12 +143,12 @@ long getAttr(byte command,int numberOfBytes){
       for(int i=0; i<numberOfBytes; i++){
         long currentByte = Wire.read();
         currentByte = currentByte << (8*i);
-        Serial.print("-Received byte: ");
+        Serial.print("-Received byte: 0x");
         Serial.println(currentByte, HEX);
         result |= currentByte;
       }
     }
-  Serial.print("-Value is: ");
+  Serial.print("-Value is: 0x");
   Serial.println(result, HEX);
   return result;
 }
