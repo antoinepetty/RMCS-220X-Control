@@ -17,23 +17,23 @@ void setup() {
   Serial.println("Starting i2c connection...");
   Wire.begin(); // join i2c bus
 
-  Serial.println("Speed is " + getMotorSpeed());
+  Serial.println("Speed is " + String(getMotorSpeed()));
   Serial.println("Setting speed to 150");
   setMotorSpeed(150);
   delay(2000);
-  Serial.println("Speed is " + getMotorSpeed());
+  Serial.println("Speed is " + String(getMotorSpeed()));
   Serial.println("Setting speed to 0");
   setMotorSpeed(0);
   delay(2000);
-  Serial.println("Speed is " + getMotorSpeed());
+  Serial.println("Speed is " + String(getMotorSpeed()));
   Serial.println("Setting speed to -150");
   setMotorSpeed(-150);
   delay(2000);
-  Serial.println("Speed is " + getMotorSpeed());
+  Serial.println("Speed is " + String(getMotorSpeed()));
   Serial.println("Setting speed to 0");
   setMotorSpeed(150);
   delay(2000);
-  Serial.println("Speed is " + getMotorSpeed());
+  Serial.println("Speed is " + String(getMotorSpeed()));
   Serial.println("End of test.");
 }
 
