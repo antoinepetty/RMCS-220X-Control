@@ -107,11 +107,11 @@ void set4ByteAttr(byte command, long value){
   Wire.write((byte) value);       // sends value byte lsb
   Serial.println("Sent byte: "+String((byte) value));
   Wire.write((byte) value >> 8);
-  Serial.println("Sent byte: "+String((byte) value >> 8);
+  Serial.println("Sent byte: "+String((byte) value >> 8));
   Wire.write((byte) value >> 16);
-  Serial.println("Sent byte: "+String((byte) value >> 16);
+  Serial.println("Sent byte: "+String((byte) value >> 16));
   Wire.write((byte) value >> 24); // sends value byte msb
-  Serial.println("Sent byte: "+String((byte) value >> 24);
+  Serial.println("Sent byte: "+String((byte) value >> 24));
   Wire.endTransmission();
 }
 
