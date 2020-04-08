@@ -18,13 +18,6 @@ void setup() {
   Serial.println("Starting i2c connection...");
   Wire.begin(); // join i2c bus
 
-  
-  
-  
-  //Serial.println("End of test.");
-}
-
-void loop() {
   printDebugInfo();
 
   
@@ -47,6 +40,12 @@ void loop() {
   setEncoderPositionInDegrees(-180);
   delay(2000);
   Serial.println("Position is " + String(getEncoderPosition()));
+  
+  Serial.println("End of test.");
+}
+
+void loop() {
+  
 }
 
 void printDebugInfo(){
@@ -181,20 +180,12 @@ void set4ByteAttr(byte command, long value){
   Wire.write(byte(command));      // sends command byte
   
   Wire.write(buf[0]);
-  Serial.print("Sent byte: 0x");
-  Serial.println(buf[0], HEX);
   
   Wire.write(buf[1]);
-  Serial.print("Sent byte: 0x");
-  Serial.println(buf[1], HEX);
   
   Wire.write(buf[2]);
-  Serial.print("Sent byte: 0x");
-  Serial.println(buf[2], HEX);
   
   Wire.write(buf[3]);
-  Serial.print("Sent byte: 0x");
-  Serial.println(buf[3], HEX);
   
   Wire.endTransmission();
 }
