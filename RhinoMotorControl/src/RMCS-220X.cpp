@@ -134,3 +134,25 @@ int RMCS220X::readGoToPositionInSteps() {
 void RMCS220X::goToRelativePositionInSteps(long value) {
     write4ByteAttr(RELATIVE_GO_TO_ATTR, value);
 }
+
+
+
+void RMCS220X::calibrateEncoderPositionInDegrees(double value) {
+    calibrateEncoderPositionInSteps(stepsFromDegrees(value));
+}
+
+double RMCS220X::readEncoderPositionInDegrees() {
+    return stepsToDegrees(readEncoderPositionInSteps());
+}
+
+void RMCS220X::goToPositionInDegrees(double value) {
+    goToPositionInSteps(stepsFromDegrees(value));
+}
+
+double RMCS220X::readGoToPositionInDegrees() {
+    return stepsToDegrees(readGoToPositionInSteps());
+}
+
+void RMCS220X::goToRelativePositionInDegrees(double value) {
+    goToRelativePositionInSteps(stepsFromDegrees(value));
+}

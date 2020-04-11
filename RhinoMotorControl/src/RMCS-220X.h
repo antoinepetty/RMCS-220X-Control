@@ -106,6 +106,24 @@ class RMCS220X{
         /* write the relative "go to" position (-2147483647 to 2147483647) */
         void goToRelativePositionInSteps(long value);    
 
+
+
+        /* set the current motor position as (-429496729.0 to 429496729.0) */
+        void calibrateEncoderPositionInDegrees(double value);
+
+        /* read the encoder position (-429496729.0 to 429496729.0) */
+        double readEncoderPositionInDegrees();
+
+        /* write the "go to" position (-429496729.0 to 429496729.0) */
+        void goToPositionInDegrees(double value);
+
+        /* read the "go to" position (-429496729.0 to 429496729.0) */
+        double readGoToPositionInDegrees();
+
+        /* write the relative "go to" position (-429496729.0 to 429496729.0) */
+        void goToRelativePositionInDegrees(double value);    
+
+
 };
 
 #endif /* RMCS220X_H */
