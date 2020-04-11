@@ -1,0 +1,44 @@
+#######################################
+# Syntax Coloring Map For RMCS-220X
+#######################################
+
+#######################################
+# Datatypes (KEYWORD1)
+#######################################
+
+#######################################
+# Methods and Functions (KEYWORD2)
+#######################################
+
+writeMaxSpeed	KEYWORD2
+readMaxSpeed	KEYWORD2
+writeSpeed	KEYWORD2
+readSpeed	KEYWORD2
+writeSpeedDamping	KEYWORD2
+readSpeedDamping	KEYWORD2
+writeSpeedFeedbackGainTerm	KEYWORD2
+readSpeedFeedbackGainTerm	KEYWORD2
+writePGainTerm	KEYWORD2
+readPGainTerm	KEYWORD2
+writeIGainTerm	KEYWORD2
+readIGainTerm	KEYWORD2
+calibrateEncoderPositionInSteps	KEYWORD2
+readEncoderPositionInSteps	KEYWORD2
+goToPositionInSteps	KEYWORD2
+readGoToPositionInSteps	KEYWORD2
+goToRelativePositionInSteps	KEYWORD2
+calibrateEncoderPositionInDegrees	KEYWORD2
+readEncoderPositionInDegrees	KEYWORD2
+goToPositionInDegrees	KEYWORD2
+readGoToPositionInDegrees	KEYWORD2
+goToRelativePositionInDegrees	KEYWORD2
+
+#######################################
+# Instances (KEYWORD2)
+#######################################
+
+RMCS220X	KEYWORD2
+
+#######################################
+# Constants (LITERAL1)
+#######################################
