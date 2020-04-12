@@ -9,8 +9,6 @@ void setup() {
   Serial.begin(9600);
   Serial.println("Start program");
 
-  delay(5000);
-
   printDebugInfo();
   
   Serial.println("Setting position to 0 deg");
