@@ -64,7 +64,7 @@ RMCS220X::RMCS220X(byte incomingi2cAddress) {
   i2cAddress = incomingi2cAddress; // set motor address
 
   // Calibrate motor. Set current position as 0
-  calibrateEncoderPositionInSteps(0);
+  //calibrateEncoderPositionInSteps(0);
 }
 
 void RMCS220X::writeMaxSpeed(int maxSpeed) {
