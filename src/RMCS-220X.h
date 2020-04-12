@@ -15,17 +15,6 @@
 #define I_GAIN_TERM_ATTR 7
 #define RELATIVE_GO_TO_ATTR 8
 
-/*// The signed byte format for inputs/outputs
-#define MAX_SPEED_ATTR_BYTES 2
-#define SPEED_ATTR_BYTES 2
-#define SPEED_DAMP_ATTR_BYTES 2
-#define ENCODER_POS_ATTR_BYTES 4
-#define GO_TO_POS_ATTR_BYTES 4
-#define SPEED_FDBK_GAIN_TERM_ATTR_BYTES 2
-#define P_GAIN_TERM_ATTR_BYTES 2
-#define I_GAIN_TERM_ATTR_BYTES 2
-#define RELATIVE_GO_TO_ATTR_BYTES 4*/
-
 #define DEGREES_RESOLUTION 0.2 // Each step of the motor is this many degrees
 
 class RMCS220X{
