@@ -1,5 +1,5 @@
 #include <Wire.h>
-#include "src/RMCS-220X.h"
+#include <RMCS-220X.h>
 
 #define ADDR 0x08 // Address of motor on i2c bus
 
