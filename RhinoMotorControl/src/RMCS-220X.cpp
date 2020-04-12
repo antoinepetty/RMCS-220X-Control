@@ -9,15 +9,17 @@ double RMCS220X::stepsToDegrees(long steps) {
 }
 
 void RMCS220X::write2ByteAttr(byte command, int value) {
-  Wire.beginTransmission(i2cAddress);
+  Serial.println("Writing 2 byte attr");
+  /*Wire.beginTransmission(i2cAddress);
   Wire.write(byte(command));          // sends command byte
   Wire.write(byte(lowByte(value)));   // sends value byte lsb
   Wire.write(byte(highByte(value)));  // sends value byte msb
-  Wire.endTransmission();
+  Wire.endTransmission();*/
 }
 
 void RMCS220X::write4ByteAttr(byte command, long value) {
-  byte buf[4];
+    Serial.println("Writing 4 byte attr"+String(command)+String(value));
+  /*byte buf[4];
   buf[0] = (byte) value;
   buf[1] = (byte) (value >> 8);
   buf[2] = (byte) (value >> 16);
@@ -31,7 +33,7 @@ void RMCS220X::write4ByteAttr(byte command, long value) {
   Wire.write(buf[2]);
   Wire.write(buf[3]);
   
-  Wire.endTransmission();
+  Wire.endTransmission();*/
 }
 
 int RMCS220X::read2ByteAttr(byte command) {
@@ -43,8 +45,9 @@ long RMCS220X::read4ByteAttr(byte command) {
 }
 
 long RMCS220X::readAttr(byte command, int numberOfBytes) {
+    Serial.println("Reading attr"+String(command)+String(numberOfBytes));
   long result = 0;
-  Wire.beginTransmission(i2cAddress);
+  /*Wire.beginTransmission(i2cAddress);
   Wire.write(byte(command));          // send command byte
   Wire.endTransmission();
   delay(5); // Delay to allow the motor's controller to react to the previous message
@@ -55,12 +58,12 @@ long RMCS220X::readAttr(byte command, int numberOfBytes) {
       currentByte = currentByte << (8*i);
       result |= currentByte;
     }
-  }
+  }*/
   return result;
 }
 
 RMCS220X::RMCS220X(byte incomingi2cAddress) {
-  Wire.begin(); // join i2c bus
+  //Wire.begin(); // join i2c bus
   i2cAddress = incomingi2cAddress; // set motor address
 
   // Calibrate motor. Set current position as 0

@@ -7,6 +7,7 @@ RMCS220X motor = RMCS220X(ADDR);
 
 void setup() {
   Serial.begin(9600);
+  Serial.println("Start program");
 
   motor = RMCS220X(ADDR);
 
