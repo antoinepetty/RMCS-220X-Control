@@ -62,9 +62,6 @@ long RMCS220X::readAttr(byte command, int numberOfBytes) {
 RMCS220X::RMCS220X(byte incomingi2cAddress) {
   Wire.begin(); // join i2c bus
   i2cAddress = incomingi2cAddress; // set motor address
-
-  // Calibrate motor. Set current position as 0
-  calibrateEncoderPositionInSteps(0);
 }
 
 void RMCS220X::writeMaxSpeed(int maxSpeed) {
