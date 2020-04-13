@@ -42,7 +42,10 @@ class RMCS220X{
 
     public:
         
-        RMCS220X(byte incomingi2cAddress);
+        RMCS220X();
+
+        /* connect to i2c bus */
+        void begin(byte incomingi2cAddress);
 
         /* write the maximum speed of the motor (0 to 255) */
         void writeMaxSpeed(int maxSpeed);
