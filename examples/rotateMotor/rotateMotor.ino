@@ -3,12 +3,13 @@
 
 #define ADDR 0x08 // Address of motor on i2c bus
 
-RMCS220X motor = RMCS220X(ADDR);
+RMCS220X motor;
 
 void setup() {
   Serial.begin(9600);
   Serial.println("Start program");
 
+  motor.begin(ADDR);
   printDebugInfo();
   
   Serial.println("Setting position to 0 deg");

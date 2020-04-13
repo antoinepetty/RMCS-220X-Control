@@ -59,9 +59,13 @@ long RMCS220X::readAttr(byte command, int numberOfBytes) {
   return result;
 }
 
-RMCS220X::RMCS220X(byte incomingi2cAddress) {
-  Wire.begin(); // join i2c bus
-  i2cAddress = incomingi2cAddress; // set motor address
+RMCS220X::RMCS220X() {
+  // Empty constructor
+}
+
+void RMCS220X::begin(byte incomingi2cAddress) {
+    Wire.begin(); // join i2c bus
+    i2cAddress = incomingi2cAddress; // set motor address
 }
 
 void RMCS220X::writeMaxSpeed(int maxSpeed) {
@@ -153,3 +157,5 @@ double RMCS220X::readGoToPositionInDegrees() {
 void RMCS220X::goToRelativePositionInDegrees(double value) {
     goToRelativePositionInSteps(stepsFromDegrees(value));
 }
+
+
