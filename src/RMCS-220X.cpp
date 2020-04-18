@@ -1,6 +1,6 @@
 #include "RMCS-220X.h"
 
-long RMCS220X::stepsFromDegrees(float angle) {
+long RMCS220X::stepsFromDegrees(double angle) {
     return angle/DEGREES_RESOLUTION;
 }
 

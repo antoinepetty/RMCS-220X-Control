@@ -21,7 +21,7 @@ class RMCS220X{
     private:
         byte i2cAddress = 0x10; // Default address for this motor is 0x10
 
-        long stepsFromDegrees(float angle);
+        long stepsFromDegrees(double angle);
 
         double stepsToDegrees(long steps);
 
