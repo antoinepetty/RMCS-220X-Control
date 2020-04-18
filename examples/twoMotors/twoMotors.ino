@@ -4,6 +4,7 @@
 /* Configure connected motors */
 #define NUMBER_OF_MOTORS 2
 int motorAddress[NUMBER_OF_MOTORS] = {0x01,0x06};
+#define MAX_ATTEMPTS 10
 
 /* Array of all connected motors */
 RMCS220X motor[NUMBER_OF_MOTORS];
@@ -75,11 +76,19 @@ void loop() {
 
 void waitForMotorPositionDegrees(int motorNum, double degreesPos){
   Serial.print("Waiting for motor to move");
+  int attempts = 0;
   double actualPosition = motor[motorNum].readEncoderPositionInDegrees();
   while(actualPosition > degreesPos+1 || actualPosition < degreesPos-1){
-    Serial.print(".");
+    if (attempts == MAX_ATTEMPTS){
+      attempts = 0;
+      Serial.println("Waiting for motor to move to position: " + String(degreesPos) + " Current position: " + String(actualPosition));
+    }
+    else{
+      Serial.print(".");
+    }
     delay(500);
     actualPosition = motor[motorNum].readEncoderPositionInDegrees();
+    attempts++;
   }
   Serial.println("done!");
 }
