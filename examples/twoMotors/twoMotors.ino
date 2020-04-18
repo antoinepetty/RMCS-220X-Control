@@ -75,9 +75,11 @@ void loop() {
 
 void waitForMotorPositionDegrees(int motorNum, double degreesPos){
   Serial.print("Waiting for motor to move");
-  while(motor[motorNum].readEncoderPositionInDegrees() != degreesPos){
+  double actualPosition = motor[motorNum].readEncoderPositionInDegrees();
+  while(actualPosition > degreesPos+1 || actualPosition < degreesPos-1){
     Serial.print(".");
     delay(500);
+    actualPosition = motor[motorNum].readEncoderPositionInDegrees();
   }
   Serial.println("done!");
 }
