@@ -8,8 +8,6 @@ int motorAddress[NUMBER_OF_MOTORS] = {0x15,0x16};
 /* Array of all connected motors */
 RMCS220X motor[NUMBER_OF_MOTORS];
 
-RMCS220X motor;
-
 void setup() {
   Serial.begin(9600);
   for (int i = 0; i < NUMBER_OF_MOTORS; i++) {
