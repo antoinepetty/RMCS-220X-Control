@@ -14,6 +14,7 @@ void RMCS220X::write2ByteAttr(byte command, int value) {
   Wire.write(byte(lowByte(value)));   // sends value byte lsb
   Wire.write(byte(highByte(value)));  // sends value byte msb
   Wire.endTransmission();
+  delay(PAUSE_DURATION_MS); // Delay to allow the motor's controller to react
 }
 
 void RMCS220X::write4ByteAttr(byte command, long value) {
@@ -32,6 +33,7 @@ void RMCS220X::write4ByteAttr(byte command, long value) {
   Wire.write(buf[3]);
   
   Wire.endTransmission();
+  delay(PAUSE_DURATION_MS); // Delay to allow the motor's controller to react
 }
 
 int RMCS220X::read2ByteAttr(byte command) {
