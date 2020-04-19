@@ -16,14 +16,13 @@ void setup() {
     Serial.print("Connecting to motor " + String(i) + " at address 0x");
     Serial.println(motorAddress[i], HEX);
     motor[i].begin(motorAddress[i]);
-
-    // Max Speed
+  }
+  // Max Speed
   Serial.print("Motor 0 Max Speed:");
   Serial.println(motor[0].readMaxSpeed());
   delay(50);
   Serial.print("Motor 1 Max Speed:");
   Serial.println(motor[1].readMaxSpeed());
-  }
 }
 
 void loop() {
