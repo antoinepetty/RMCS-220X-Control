@@ -48,7 +48,7 @@ long RMCS220X::readAttr(byte command, int numberOfBytes) {
       Wire.read();
   }
 
-  long result = 0;
+  long result = -1;
   Wire.beginTransmission(i2cAddress);
   Wire.write(byte(command));          // send command byte
   Wire.endTransmission();
