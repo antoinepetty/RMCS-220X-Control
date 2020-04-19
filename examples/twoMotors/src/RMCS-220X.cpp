@@ -1,6 +1,6 @@
 #include "RMCS-220X.h"
 
-long RMCS220X::stepsFromDegrees(float angle) {
+long RMCS220X::stepsFromDegrees(double angle) {
     return angle/DEGREES_RESOLUTION;
 }
 
@@ -47,7 +47,7 @@ long RMCS220X::readAttr(byte command, int numberOfBytes) {
   while (Wire.available()) {
       Wire.read();
   }
-
+  
   long result = -1;
   Wire.beginTransmission(i2cAddress);
   Wire.write(byte(command));          // send command byte
