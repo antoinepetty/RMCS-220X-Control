@@ -60,7 +60,7 @@ long RMCS220X::readAttr(byte command, int numberOfBytes) {
   Serial.print(". Expected "+String(numberOfBytes)+"bytes. Received " + String(Wire.available()) + " bytes: {");
   if (numberOfBytes <= Wire.available()) { // if correct num of bytes received
     for(int i=0; i<numberOfBytes; i++){
-      long currentByte = Wire.read();
+      long currentByte = (byte) Wire.read();
       Serial.print("<"+String(i)+">");
       Serial.print(currentByte, HEX);
       currentByte = currentByte << (8*i);
