@@ -49,6 +49,7 @@ long RMCS220X::readAttr(byte command, int numberOfBytes) {
   Wire.endTransmission();
   delay(PAUSE_DURATION_MS); // Delay to allow the motor's controller to react to the previous message
   Wire.requestFrom((int) i2cAddress, (int) numberOfBytes);
+  delay(PAUSE_DURATION_MS); // Delay to allow the motor's controller to react to the previous message
   if (numberOfBytes <= Wire.available()) { // if correct num of bytes received
     for(int i=0; i<numberOfBytes; i++){
       long currentByte = Wire.read();

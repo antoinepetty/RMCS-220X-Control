@@ -16,7 +16,7 @@
 #define RELATIVE_GO_TO_ATTR 8
 
 #define DEGREES_RESOLUTION 0.2 // Each step of the motor is this many degrees
-#define PAUSE_DURATION_MS 10 // How many milliseconds to pause between messages
+#define PAUSE_DURATION_MS 5 // How many milliseconds to pause between messages
 
 class RMCS220X{
     private:
