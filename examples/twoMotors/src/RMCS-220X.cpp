@@ -58,6 +58,7 @@ long RMCS220X::readAttr(byte command, int numberOfBytes) {
     return result;
   }
   else{
+    Serial.println("\nERROR: No data received. Available bytes: "+String(Wire.available()));
     return -1;
   }
 }
