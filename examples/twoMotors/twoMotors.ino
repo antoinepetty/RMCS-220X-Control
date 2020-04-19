@@ -1,5 +1,5 @@
 #include <Wire.h>
-#include <RMCS-220X.h>
+#include "src/RMCS-220X.h"
 
 /* Configure connected motors */
 #define NUMBER_OF_MOTORS 2
