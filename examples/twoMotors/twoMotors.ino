@@ -4,7 +4,8 @@
 /* Configure connected motors */
 #define NUMBER_OF_MOTORS 2
 int motorAddress[NUMBER_OF_MOTORS] = {0x01,0x06};
-#define MAX_ATTEMPTS 10
+#define MAX_ATTEMPTS 10 // Number of attempts to turn before printign debug info
+#define MARGIN_OF_ERROR 1 // How many degrees margin of error when checking current position
 
 /* Array of all connected motors */
 RMCS220X motor[NUMBER_OF_MOTORS];
@@ -78,7 +79,7 @@ void waitForMotorPositionDegrees(int motorNum, double degreesPos){
   Serial.print("Waiting for motor to move");
   int attempts = 0;
   double actualPosition = motor[motorNum].readEncoderPositionInDegrees();
-  while(actualPosition > degreesPos+1 || actualPosition < degreesPos-1){
+  while(actualPosition > degreesPos+MARGIN_OF_ERROR || actualPosition < degreesPos-MARGIN_OF_ERROR){
     if (attempts == MAX_ATTEMPTS){
       attempts = 0;
       Serial.println("Waiting for motor to move to position: " + String(degreesPos) + " Current position: " + String(actualPosition));
