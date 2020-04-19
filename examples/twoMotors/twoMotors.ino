@@ -81,13 +81,18 @@ void waitForMotorPositionDegrees(int motorNum, double degreesPos){
   while(actualPosition > degreesPos+MARGIN_OF_ERROR || actualPosition < degreesPos-MARGIN_OF_ERROR){
     if (attempts == MAX_ATTEMPTS){
       attempts = 0;
-      Serial.println("Waiting for motor to move to position: " + String(degreesPos) + " Current position: " + String(actualPosition));
+      Serial.println("Intended position: " + String(degreesPos) + " Current position: " + String(actualPosition));
     }
     else{
       Serial.print(".");
     }
     delay(500);
+    double previousPosition = actualPosition;
     actualPosition = motor[motorNum].readEncoderPositionInDegrees();
+    if(previousPosition == actualPosition){
+      Serial.println("Motor not moving, trying command again.");
+      motor[motorNum].goToPositionInDegrees(degreesPos);
+    }
     attempts++;
   }
   Serial.println("done!");
