@@ -44,10 +44,10 @@ long RMCS220X::read4ByteAttr(byte command) {
 
 long RMCS220X::readAttr(byte command, int numberOfBytes) {
   // Clear message buffer before trying to read
-  while (Wire.available()) {
+  /*while (Wire.available()) {
       Wire.read();
-  }
-  
+  }*/
+
   long result = -1;
   Wire.beginTransmission(i2cAddress);
   Wire.write(byte(command));          // send command byte
