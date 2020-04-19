@@ -20,7 +20,6 @@ void setup() {
   // Max Speed
   Serial.print("Motor 0 Max Speed:");
   Serial.println(motor[0].readMaxSpeed());
-  delay(50);
   Serial.print("Motor 1 Max Speed:");
   Serial.println(motor[1].readMaxSpeed());
 }
@@ -31,47 +30,34 @@ void loop() {
   // Read Position
   Serial.print("Motor 0 Position:");
   Serial.println(motor[0].readEncoderPositionInDegrees());
-  delay(50);
   Serial.print("Motor 1 Position:");
   Serial.println(motor[1].readEncoderPositionInDegrees());
   
   // Go to 0
   Serial.println("Going to 0 deg");
   motor[0].goToPositionInDegrees(0);
-  delay(50);
   motor[1].goToPositionInDegrees(0);
-  delay(50);
   waitForMotorPositionDegrees(0,0);
-  delay(50);
   waitForMotorPositionDegrees(1,0);
-  delay(50);
 
   // Read Position
   Serial.print("Motor 0 Position:");
   Serial.println(motor[0].readEncoderPositionInDegrees());
-  delay(5);
   Serial.print("Motor 1 Position:");
   Serial.println(motor[1].readEncoderPositionInDegrees());
-  delay(5);
 
   // Go to 180
   Serial.println("Going to 180 deg");
   motor[0].goToPositionInDegrees(180);
-  delay(50);
   motor[1].goToPositionInDegrees(180);
-  delay(50);
   waitForMotorPositionDegrees(0,180);
-  delay(50);
   waitForMotorPositionDegrees(1,180);
-  delay(50);
 
   // Read Position
   Serial.print("Motor 0 Position:");
   Serial.println(motor[0].readEncoderPositionInDegrees());
-  delay(50);
   Serial.print("Motor 1 Position:");
   Serial.println(motor[1].readEncoderPositionInDegrees());
-  delay(50);
 }
 
 void waitForMotorPositionDegrees(int motorNum, double degreesPos){
