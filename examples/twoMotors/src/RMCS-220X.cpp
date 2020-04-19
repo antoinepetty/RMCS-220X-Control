@@ -57,10 +57,11 @@ long RMCS220X::readAttr(byte command, int numberOfBytes) {
   Wire.endTransmission();
   delay(PAUSE_DURATION_MS); // Delay to allow the motor's controller to react to the previous message
   Wire.requestFrom((int) i2cAddress, (int) numberOfBytes);
-  Serial.print(". Received " + String(Wire.available()) + " bytes: {");
+  Serial.print(". Expected "+numberOfBytes+"bytes. Received " + String(Wire.available()) + " bytes: {");
   if (numberOfBytes <= Wire.available()) { // if correct num of bytes received
     for(int i=0; i<numberOfBytes; i++){
       long currentByte = Wire.read();
+      Serial.print("<"+String(i)+">");
       Serial.print(currentByte, HEX);
       currentByte = currentByte << (8*i);
       result |= currentByte;
